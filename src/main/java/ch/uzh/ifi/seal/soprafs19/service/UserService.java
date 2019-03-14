@@ -36,6 +36,18 @@ public class UserService {
     public User getUserByUsername (String usernameUser) {return this.userRepository.findByUsername(usernameUser);}
 
     public User createUser(User newUser) {
+
+       // Assert.assertNull(userRepository.findByUsername("testUsername"));
+
+        //User testUser = new User();
+       // testUser.setName("testName");
+      //  testUser.setUsername("testUsername");
+
+      //  User createdUser = userService.createUser(testUser);
+
+       // Assert.assertNotNull(createdUser.getToken());
+      //  Assert.assertEquals(createdUser.getStatus(),UserStatus.ONLINE);
+       // Assert.assertEquals(createdUser, userRepository.findByToken(createdUser.getToken()));
         newUser.creationDate =  LocalDate.now();
         newUser.setToken(UUID.randomUUID().toString());
         newUser.setStatus(UserStatus.ONLINE);
@@ -43,8 +55,9 @@ public class UserService {
         log.debug("Created Information for User: {}", newUser);
         return newUser;
     }
+
     public User checkCredentials(User loginUser) throws ExceptionLogin {
-        User targetUser = this.userRepository.findByUsername(loginUser.getUsername());
+    User targetUser = this.userRepository.findByUsername(loginUser.getUsername());
         if (targetUser != null) {
             if (targetUser.getPassword().equals(loginUser.getPassword())) {
                 targetUser.setStatus(UserStatus.ONLINE);
@@ -56,10 +69,12 @@ public class UserService {
             throw new ExceptionLogin();
         }
     }
+
     public User logOut(long idUser, User logOutUser){
         logOutUser.setStatus(UserStatus.OFFLINE);
         return logOutUser;
     }
+
     public User updateUser(long idUser,User updatedUser){
         User checkUser = this.userRepository.findByUsername(updatedUser.getUsername());
         User anUser = getUser(idUser);
@@ -79,4 +94,13 @@ public class UserService {
         return anUser;
 
     }
+
+
+
+
+
+
+
+
+
 }

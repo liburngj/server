@@ -6,7 +6,7 @@ import ch.uzh.ifi.seal.soprafs19.repository.UserRepository;
 import ch.uzh.ifi.seal.soprafs19.service.UserService;
 import org.springframework.web.bind.annotation.*;
 import ch.uzh.ifi.seal.soprafs19.exceptions.ExceptionLogin;
-
+import org.springframework.http.HttpStatus;
 import java.util.Map;
 
 @RestController
@@ -28,6 +28,8 @@ public class UserController {
         return service.getUser(idUser);
     }
 
+
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/users")
     User createUser(@RequestBody User newUser) {
         if (service.getUserByUsername(newUser.getUsername()) != null) {

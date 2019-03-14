@@ -36,8 +36,10 @@ public class UserServiceTest {
         Assert.assertNull(userRepository.findByUsername("testUsername"));
 
         User testUser = new User();
-        testUser.setName("testName");
+        testUser.setUsername("testName");
         testUser.setUsername("testUsername");
+        testUser.setPassword("testPasswork");
+
 
         User createdUser = userService.createUser(testUser);
 
@@ -45,4 +47,8 @@ public class UserServiceTest {
         Assert.assertEquals(createdUser.getStatus(),UserStatus.ONLINE);
         Assert.assertEquals(createdUser, userRepository.findByToken(createdUser.getToken()));
     }
+
+
+
+
 }
