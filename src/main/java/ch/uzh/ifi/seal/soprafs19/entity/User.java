@@ -8,28 +8,32 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.time.LocalDate;
 
 @Entity
 public class User implements Serializable {
-	
+
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue
 	private Long id;
-	
-	@Column(nullable = false) 
-	private String name;
-	
-	@Column(nullable = false, unique = true) 
+
+	@Column(nullable = false)
+	private String password;
+
+	@Column(nullable = false, unique = true)
 	private String username;
-	
-	@Column(nullable = false, unique = true) 
+
+	@Column(nullable = false, unique = true)
 	private String token;
 
 	@Column(nullable = false)
 	private UserStatus status;
+
+	public String birthday;
+	public LocalDate creationDate;
 
 	public Long getId() {
 		return id;
@@ -39,13 +43,16 @@ public class User implements Serializable {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setPassword(String password) {
+		this.password = password;
 	}
+	public void SetBirthday(String birthday) { this.birthday = birthday; }
+
+	public String getBirthday() { return birthday; }
 
 	public String getUsername() {
 		return username;
@@ -80,4 +87,5 @@ public class User implements Serializable {
 		User user = (User) o;
 		return this.getId().equals(user.getId());
 	}
+
 }
